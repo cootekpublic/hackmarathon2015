@@ -231,7 +231,11 @@ class Status(object):
 
     def update(self):
         for i in range(9):
+            pre_status = self.region_status[i]
             self.update_region(i)
+            if self.region_status[i] != pre_status:
+                output_command(command='region_win', player=self.region_status[i], region=str(i))
+
         #print self.region_status
         #print self.first_full
         sum_0 = 0
@@ -255,6 +259,10 @@ class Status(object):
             self.game_status = 1
 
 
+def output_command(**kw):
+    #print {'command':command, 'player':player, 'card':card}
+    print str(kw) + ','
+
 class Player(object):
     def __init__(self, n):
         player_key = 'player%d'%n
@@ -262,6 +270,7 @@ class Player(object):
         app = config[player_key]
         self.cards_in_hand = set()
         self.msg = []
+        self.n = n
 
         p = Popen(app, shell=True, stdin=PIPE, stdout=PIPE, close_fds=True)
         (self.child_stdin, self.child_stdout) = (p.stdin, p.stdout)
@@ -296,9 +305,11 @@ class Player(object):
         #print self.cards_in_hand
         while len(self.cards_in_hand) < 7 and cardpool.has_next():
             card = cardpool.get_next()
+            output_command(command='get_card', player=str(self.n), card=card)
             self.cards_in_hand.add(card)
             self.msg.append("cardget " + card)
         (region, card) = self.interact()
+        output_command(command='action', player=str(self.n), region=region, card=card)
         self.cards_in_hand.remove(card)
         return region, card
 
@@ -309,7 +320,9 @@ status = Status()
     
 class Game(object):
     def __init__(self):
-        magic = random.randint(0,1)
+        #magic control who's on the offensive 
+        #magic = random.randint(0,1)
+        magic = 0
         self.players = [Player(magic), Player(1-magic)]
 
     def start(self):
@@ -326,10 +339,11 @@ class Game(object):
                     break
         self.players[0].end_game(status.game_status == 0)
         self.players[1].end_game(status.game_status == 1)
-        if status.game_status == 0:
-            print 'player0 win'
-        else:
-            print 'player1 win'
+        #if status.game_status == 0:
+        #    print 'player0 win'
+        #else:
+        #    print 'player1 win'
+        output_command(command="game_win", player=str(status.game_status))
 
 if __name__ == '__main__':
     Game().start()
