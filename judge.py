@@ -245,7 +245,7 @@ class Status(object):
                 sum_0 += 1
             if self.region_status[i] == 1:
                 sum_1 += 1
-            if i >= 6:
+            if i > 6:
                 continue
             if self.region_status[i] == 0 and self.region_status[i+1] == 0 and self.region_status[i+2] == 0:
                 self.game_status = 0
