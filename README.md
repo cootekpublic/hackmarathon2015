@@ -1,6 +1,6 @@
 # TouchPal Internship Hack Marathon 2015 summer
 
-### Interaction
+### Introduction
 
 1.  You should prepare an executable application for this game.
 2.  Modify config.json and indicate the application runtime.
