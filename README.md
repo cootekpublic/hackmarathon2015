@@ -2,13 +2,13 @@
 
 ### Interaction
 
-1. You should prepare an executable application for this game.
-2. Modify config.json and indicate the application runtime.
-3. run ./judge.py to play the game.
+1.  You should prepare an executable application for this game.
+2.  Modify config.json and indicate the application runtime.
+3.  run ./judge.py to play the game.
 
 ### Protocol
 
-1. Card Name:
+Card Name:
 There are 60 cards:
 {A..F} * {1..10} (letter means color)
 
@@ -20,13 +20,13 @@ act $region $card
 (please make sure do flush after write)
 
 Player will receive 3 kinds of message:
-1. cardget $card
+1.  cardget $card
 You got a new card $card.
 
-2. rival $region $card
+2.  rival $region $card
 Your rival put a $card on $region
 
-3. youwin / youlose
+3.  youwin / youlose
 
 In each turn, you will receive a line containing an integer N whitch indicates the number of messages you will be sent.
 And the following N lines describe the messages.
