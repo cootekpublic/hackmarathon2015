@@ -1,12 +1,12 @@
 # TouchPal Internship Hack Marathon 2015 summer
 
-# Interaction
+### Interaction
 
 1. You should prepare an executable application for this game.
 2. Modify config.json and indicate the application runtime.
 3. run ./judge.py to play the game.
 
-# Protocol
+### Protocol
 
 1. Card Name:
 There are 60 cards:
