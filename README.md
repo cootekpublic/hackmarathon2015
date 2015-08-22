@@ -21,15 +21,8 @@ act $region $card
 
 Player will receive 3 kinds of message:
 
-1.  cardget $card
-
-You got a new card $card.
-
-2.  rival $region $card
-
-Your rival put a $card on $region
-
-
+1.  cardget $card        #You got a new card $card.
+2.  rival $region $card  #Your rival put a $card on $region
 3.  youwin / youlose
 
 In each turn, you will receive a line containing an integer N whitch indicates the number of messages you will be sent.
