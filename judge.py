@@ -260,12 +260,12 @@ class Status(object):
 
 
 def output_command(**kw):
-    #print {'command':command, 'player':player, 'card':card}
-    print str(kw) + ','
+    #print str(kw) + ','
+    pass
 
 class Player(object):
-    def __init__(self, n):
-        player_key = 'player%d'%n
+    def __init__(self, n, code_in_config):
+        player_key = 'player'+code_in_config
         config = json.load(open("config.json"))
         app = config[player_key]
         self.cards_in_hand = set()
@@ -319,11 +319,11 @@ class Player(object):
 status = Status()
     
 class Game(object):
-    def __init__(self):
+    def __init__(self, player1, player2):
         #magic control who's on the offensive 
-        #magic = random.randint(0,1)
-        magic = 0
-        self.players = [Player(magic), Player(1-magic)]
+        self.magic = 0
+        #self.magic = random.randint(0,1)
+        self.players = [Player(self.magic, player1), Player(1-self.magic, player2)]
 
     def start(self):
         round_cnt = 0
@@ -339,11 +339,11 @@ class Game(object):
                     break
         self.players[0].end_game(status.game_status == 0)
         self.players[1].end_game(status.game_status == 1)
-        #if status.game_status == 0:
-        #    print 'player0 win'
-        #else:
-        #    print 'player1 win'
+        if status.game_status == 0:
+            print 'player%s win' % sys.argv[1]
+        else:
+            print 'player%s win' % sys.argv[2]
         output_command(command="game_win", player=str(status.game_status))
 
 if __name__ == '__main__':
-    Game().start()
+    Game(sys.argv[1], sys.argv[2]).start()

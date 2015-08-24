@@ -1,4 +1,10 @@
 {
-    "player0": "./demo_0822_1436",
-    "player1": "./demo_0822_1436"
+    "player1": "./precodes/g1.py",
+    "player2": "./precodes/g2.py",
+    "player3": "./precodes/g3.py",
+    "player4": "./precodes/g4.py",
+    "player5": "./precodes/g5.py",
+    "player6": "./precodes/g6.py",
+    "player7": "./precodes/g7.py",
+    "player8": "./precodes/g8"
 }
